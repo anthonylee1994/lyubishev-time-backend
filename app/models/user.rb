@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class User < ApplicationRecord
   validates :telegram_id, presence: true, uniqueness: true
   validates :first_name, presence: true
