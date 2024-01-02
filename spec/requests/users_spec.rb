@@ -27,5 +27,10 @@ RSpec.describe 'Users', type: :request do
       expect(json_body['photo_url']).to eq(user.photo_url)
       expect(json_body['auth_date']).to eq(user.auth_date)
     end
+
+    example 'fail case' do
+      get '/me', as: :json, headers: { Authorization: 'Bearer 1234' }
+      expect(response).to have_http_status(:unauthorized)
+    end
   end
 end
