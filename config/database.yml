@@ -80,5 +80,4 @@ test:
 production:
   <<: *default
   database: lyubishev_time_backend_production
-  username: lyubishev_time_backend
-  password: <%= ENV["LYUBISHEV_TIME_BACKEND_DATABASE_PASSWORD"] %>
+  username: postgres
