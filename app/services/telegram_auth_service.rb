@@ -9,7 +9,7 @@ class TelegramAuthService
     secret_key = OpenSSL::Digest.new('SHA256').digest(Settings.telegram.bot_token)
     hash = OpenSSL::HMAC.hexdigest(OpenSSL::Digest.new('SHA256'), secret_key, check_string)
 
-    raise StandardError, 'Data is NOT from Telegram' if hash.casecmp(check_hash) != 0
+    raise Exceptions::InvalidToken if hash.casecmp(check_hash) != 0
 
     true
   end
