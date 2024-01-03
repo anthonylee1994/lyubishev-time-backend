@@ -1,2 +1,2 @@
 telegram:
-  bot_token: '6257715756:AAGZIiOE26rS2yFoMZzChlZmr-Z-NAHrX4I'
+  bot_token: <%= ENV['BOT_TOKEN'] %>
