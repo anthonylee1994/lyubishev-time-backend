@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_01_03_024343) do
+ActiveRecord::Schema[7.1].define(version: 2024_01_03_064209) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -34,6 +34,19 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_03_024343) do
     t.index ["user_id"], name: "index_time_event_tags_on_user_id"
   end
 
+  create_table "time_events", force: :cascade do |t|
+    t.string "name", null: false
+    t.integer "minute", null: false
+    t.datetime "date", null: false
+    t.integer "order", default: 0, null: false
+    t.bigint "tag_id", null: false
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["tag_id"], name: "index_time_events_on_tag_id"
+    t.index ["user_id"], name: "index_time_events_on_user_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "telegram_id", null: false
     t.string "first_name", null: false
@@ -47,4 +60,6 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_03_024343) do
   end
 
   add_foreign_key "time_event_tags", "users"
+  add_foreign_key "time_events", "time_event_tags", column: "tag_id"
+  add_foreign_key "time_events", "users"
 end

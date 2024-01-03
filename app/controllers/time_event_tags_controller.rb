@@ -2,7 +2,7 @@ class TimeEventTagsController < ApplicationController
   before_action :set_time_event_tag, only: %i[update]
 
   def index
-    render json: list_all, includes: '**'
+    render json: list_all
   end
 
   def create
@@ -30,7 +30,7 @@ class TimeEventTagsController < ApplicationController
       end
     end
 
-    render json: list_all, includes: '**'
+    render json: list_all
   end
 
   def destroy
@@ -40,12 +40,12 @@ class TimeEventTagsController < ApplicationController
 
   private
 
-  def set_time_event_tag
-    @time_event_tag = @current_user.time_event_tags.find(params[:id])
-  end
-
   def time_event_tag_params
     params.permit(:name, :color_id, :order)
+  end
+
+  def set_time_event_tag
+    @time_event_tag = @current_user.time_event_tags.find(params[:id])
   end
 
   def list_all

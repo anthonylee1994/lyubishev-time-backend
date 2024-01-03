@@ -12,6 +12,9 @@ Rails.application.routes.draw do
 
   put 'time_event_tags/reorder', action: :reorder, controller: :time_event_tags
   resources :time_event_tags, only: %i[index create update destroy]
+
+  put 'time_events/reorder', action: :reorder, controller: :time_events
+  resources :time_events, only: %i[index create update destroy]
   resources :colors, only: %i[index]
 
   # Defines the root path route ("/")

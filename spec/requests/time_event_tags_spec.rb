@@ -2,10 +2,7 @@ require 'rails_helper'
 
 RSpec.describe 'TimeEventTags', type: :request do
   let(:user) { User.first }
-
-  let(:first_time_event_tag) do
-    user.time_event_tags.first
-  end
+  let(:first_time_event_tag) { user.time_event_tags.first }
 
   before(:each) do
     load "#{Rails.root}/db/seeds/user.seeds.rb"

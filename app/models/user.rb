@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_many :time_event_tags, dependent: :destroy
+  has_many :time_events, dependent: :destroy
 
   validates :telegram_id, presence: true, uniqueness: true
   validates :first_name, presence: true
@@ -28,10 +29,14 @@ class User < ApplicationRecord
 
   def create_default_time_event_tags
     time_event_tags.create!([
-                              { name: '緊急重要', color: Color.find_by(name: '紅色'), order: 0 },
-                              { name: '不緊急重要', color: Color.find_by(name: '黃色'), order: 1 },
-                              { name: '緊急不重要', color: Color.find_by(name: '綠色'), order: 2 },
-                              { name: '不緊急不重要', color: Color.find_by(name: '藍色'), order: 3 }
+                              { name: '緊急重要', color: Color.find_or_create_by(name: '紅色', hexcode: '#E53E3E'),
+                                order: 0 },
+                              { name: '不緊急重要', color: Color.find_or_create_by(name: '黃色', hexcode: '#D69E2E'),
+                                order: 1 },
+                              { name: '緊急不重要', color: Color.find_or_create_by(name: '綠色', hexcode: '#38A169'),
+                                order: 2 },
+                              { name: '不緊急不重要', color: Color.find_or_create_by(name: '藍色', hexcode: '#3182CE'),
+                                order: 3 }
                             ])
   end
 end
