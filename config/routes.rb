@@ -9,6 +9,7 @@ Rails.application.routes.draw do
 
   post 'auth/login', action: :login, controller: :auth
   get 'me', action: :me, controller: :users
+  get 'summary', action: :index, controller: :summary
 
   put 'time_event_tags/reorder', action: :reorder, controller: :time_event_tags
   resources :time_event_tags, only: %i[index create update destroy]

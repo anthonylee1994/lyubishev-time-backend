@@ -37,7 +37,7 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_03_064209) do
   create_table "time_events", force: :cascade do |t|
     t.string "name", null: false
     t.integer "minute", null: false
-    t.datetime "date", null: false
+    t.date "date", null: false
     t.integer "order", default: 0, null: false
     t.bigint "tag_id", null: false
     t.bigint "user_id", null: false
