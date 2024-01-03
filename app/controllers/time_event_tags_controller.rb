@@ -2,11 +2,7 @@ class TimeEventTagsController < ApplicationController
   before_action :set_time_event_tag, only: %i[update]
 
   def index
-    empty_name_items = @current_user.time_event_tags.where.not(name: '').order(:order)
-    has_name_items = @current_user.time_event_tags.where(name: '').order(:order)
-    items = empty_name_items + has_name_items
-
-    render json: items
+    render json: list_all, includes: '**'
   end
 
   def create
@@ -27,11 +23,32 @@ class TimeEventTagsController < ApplicationController
     end
   end
 
+  def reorder
+    ActiveRecord::Base.transaction do
+      params[:ids].each_with_index do |time_event_tag_id, index|
+        @current_user.time_event_tags.find(time_event_tag_id).update!(order: index)
+      end
+    end
+
+    render json: list_all, includes: '**'
+  end
+
+  def destroy
+    @time_event_tag = @current_user.time_event_tags.find(params[:id])
+    @time_event_tag.destroy
+  end
+
+  private
+
   def set_time_event_tag
     @time_event_tag = @current_user.time_event_tags.find(params[:id])
   end
 
   def time_event_tag_params
     params.permit(:name, :color_id, :order)
+  end
+
+  def list_all
+    @current_user.time_event_tags.includes(:color).order(:order)
   end
 end

@@ -10,7 +10,9 @@ Rails.application.routes.draw do
   post 'auth/login', action: :login, controller: :auth
   get 'me', action: :me, controller: :users
 
-  resources :time_event_tags, only: %i[index create update]
+  put 'time_event_tags/reorder', action: :reorder, controller: :time_event_tags
+  resources :time_event_tags, only: %i[index create update destroy]
+  resources :colors, only: %i[index]
 
   # Defines the root path route ("/")
   root 'home#index'

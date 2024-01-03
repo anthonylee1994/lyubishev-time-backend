@@ -1,3 +1,5 @@
+Color.destroy_all
+
 Color.create!([
                 { name: '紅色', hexcode: '#E53E3E' },
                 { name: '橙色', hexcode: '#DD6B20' },

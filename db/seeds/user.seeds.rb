@@ -1,3 +1,5 @@
+User.destroy_all
+
 User.create!(
   telegram_id: '234392020',
   first_name: '窮三代IT狗',
