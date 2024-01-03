@@ -46,6 +46,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_03_024343) do
     t.index ["telegram_id"], name: "index_users_on_telegram_id", unique: true
   end
 
-  add_foreign_key "time_event_tags", "colors"
   add_foreign_key "time_event_tags", "users"
 end

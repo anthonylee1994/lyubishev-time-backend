@@ -23,10 +23,22 @@ RSpec.describe 'TimeEventTags', type: :request do
       expect(json_body.pluck('color').pluck('hexcode')).to eq(%w[#E53E3E])
     end
 
-    example 'update first time event tag', focus: true do
+    example 'create time event tag' do
+      post '/time_event_tags', as: :json,
+                               headers: { Authorization: "Bearer #{user.token}" },
+                               params: { name: '運動', color_id: Color.first.id }
+
+      expect(response).to have_http_status(:success)
+
+      json_body = JSON.parse(response.body)
+
+      expect(json_body['name']).to eq('運動')
+    end
+
+    example 'update first time event tag' do
       put "/time_event_tags/#{first_time_event_tag.id}", as: :json,
                                                          headers: { Authorization: "Bearer #{user.token}" },
-                                                         params: { name: '運動', color: Color.first }
+                                                         params: { name: '運動', color_id: Color.first.id }
       expect(response).to have_http_status(:success)
 
       json_body = JSON.parse(response.body)
