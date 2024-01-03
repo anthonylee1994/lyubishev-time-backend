@@ -29,11 +29,12 @@ RSpec.describe 'Auths', type: :request do
       expect(response).to have_http_status(:success)
 
       json_body = JSON.parse(response.body)
-      expect(json_body['user']['telegram_id']).to eq(correct_auth_data[:id])
-      expect(json_body['user']['first_name']).to eq(correct_auth_data[:first_name])
-      expect(json_body['user']['username']).to eq(correct_auth_data[:username])
-      expect(json_body['user']['photo_url']).to eq(correct_auth_data[:photo_url])
-      expect(json_body['user']['auth_date']).to eq(correct_auth_data[:auth_date])
+
+      expect(json_body['telegram_id']).to eq(correct_auth_data[:id])
+      expect(json_body['first_name']).to eq(correct_auth_data[:first_name])
+      expect(json_body['username']).to eq(correct_auth_data[:username])
+      expect(json_body['photo_url']).to eq(correct_auth_data[:photo_url])
+      expect(json_body['auth_date']).to eq(correct_auth_data[:auth_date])
       expect(json_body['token']).to be_present
     end
 

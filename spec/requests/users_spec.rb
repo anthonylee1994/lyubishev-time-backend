@@ -26,6 +26,7 @@ RSpec.describe 'Users', type: :request do
       expect(json_body['username']).to eq(user.username)
       expect(json_body['photo_url']).to eq(user.photo_url)
       expect(json_body['auth_date']).to eq(user.auth_date)
+      expect(json_body['token']).not_to be_present
     end
 
     example 'fail case' do

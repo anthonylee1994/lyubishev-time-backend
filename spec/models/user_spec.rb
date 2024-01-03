@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  example 'create user 窮三代IT狗' do
+  example 'create user' do
     user = User.create!(
       telegram_id: '234392020',
       first_name: '窮三代IT狗',

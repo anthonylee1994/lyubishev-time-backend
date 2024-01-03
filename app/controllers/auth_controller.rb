@@ -8,8 +8,8 @@ class AuthController < ApplicationController
       head :unauthorized
       return
     end
-    @user = User.from_auth_data(auth_params)
-    render json: { user: @user, token: @user.token }, status: :ok
+    @current_user = User.from_auth_data(auth_params)
+    render json: @current_user, status: :ok, show_token: true
   end
 
   private

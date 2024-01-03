@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'auth/login', action: :login, controller: :auth
   get 'me', action: :me, controller: :users
 
+  resources :time_event_tags, only: %i[index update]
+
   # Defines the root path route ("/")
   root 'home#index'
 end
