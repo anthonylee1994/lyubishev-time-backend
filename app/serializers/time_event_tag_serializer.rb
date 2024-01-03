@@ -1,5 +1,5 @@
 class TimeEventTagSerializer < ActiveModel::Serializer
-  attributes TimeEventTag.attribute_names.map(&:to_sym)
+  attributes %w[id color_id name user_id order created_at updated_at]
 
   belongs_to :color
 end
