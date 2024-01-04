@@ -29,13 +29,13 @@ class User < ApplicationRecord
 
   def create_default_time_event_tags
     time_event_tags.create!([
-                              { name: '緊急重要', color: Color.find_or_create_by(name: '紅色', hexcode: '#E53E3E'),
+                              { name: '緊急重要', color: Color.find_by(name: '紅色'),
                                 order: 0 },
-                              { name: '不緊急重要', color: Color.find_or_create_by(name: '黃色', hexcode: '#D69E2E'),
+                              { name: '不緊急重要', color: Color.find_by(name: '黃色'),
                                 order: 1 },
-                              { name: '緊急不重要', color: Color.find_or_create_by(name: '綠色', hexcode: '#38A169'),
+                              { name: '緊急不重要', color: Color.find_by(name: '綠色'),
                                 order: 2 },
-                              { name: '不緊急不重要', color: Color.find_or_create_by(name: '藍色', hexcode: '#3182CE'),
+                              { name: '不緊急不重要', color: Color.find_by(name: '藍色'),
                                 order: 3 }
                             ])
   end
