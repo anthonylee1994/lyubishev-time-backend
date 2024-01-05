@@ -2,7 +2,11 @@ class TimeEventsController < ApplicationController
   before_action :set_time_event, only: %i[update]
 
   def index
-    if params[:date].blank?
+    if params[:time_event_tag_id]
+      @time_event_tag = @current_user.time_event_tags.find(params[:time_event_tag_id])
+      render json: @time_event_tag.time_events.one_year_ago.load_children_with_order
+      return
+    elsif params[:date].blank?
       render json: { error: 'date is required' }, status: :unprocessable_entity
       return
     end
@@ -54,6 +58,6 @@ class TimeEventsController < ApplicationController
   end
 
   def list_all
-    @current_user.time_events.where(date: params[:date]).includes(:tag).order(:order)
+    @current_user.time_events.where(date: params[:date]).load_children_with_order
   end
 end

@@ -12,7 +12,10 @@ Rails.application.routes.draw do
   get 'summary', action: :index, controller: :summary
 
   put 'time_event_tags/reorder', action: :reorder, controller: :time_event_tags
-  resources :time_event_tags, only: %i[index create update destroy]
+
+  resources :time_event_tags, only: %i[index create update destroy] do
+    resources :time_events, only: %i[index]
+  end
 
   put 'time_events/reorder', action: :reorder, controller: :time_events
   resources :time_events, only: %i[index create update destroy]

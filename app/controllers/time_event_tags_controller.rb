@@ -49,6 +49,6 @@ class TimeEventTagsController < ApplicationController
   end
 
   def list_all
-    @current_user.time_event_tags.includes(:color).order(:order)
+    @current_user.time_event_tags.load_children_with_order
   end
 end
