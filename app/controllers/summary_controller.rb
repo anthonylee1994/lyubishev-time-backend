@@ -2,20 +2,8 @@
 
 class SummaryController < ApplicationController
   def index
-    render json: { daily:, seven_days:, thirty_days: }
-  end
+    params[:day] = 1 unless params[:day].present?
 
-  private
-
-  def daily
-    @current_user.time_events.where(date: 1.days.ago..Time.zone.now).group(:tag_id).sum(:minute)
-  end
-
-  def seven_days
-    @current_user.time_events.where(date: 7.days.ago..Time.zone.now).group(:tag_id).sum(:minute)
-  end
-
-  def thirty_days
-    @current_user.time_events.where(date: 30.days.ago..Time.zone.now).group(:tag_id).sum(:minute)
+    render json: @current_user.time_events.where(date: params[:day].to_i.days.ago..Time.zone.now).group(:tag_id).sum(:minute)
   end
 end

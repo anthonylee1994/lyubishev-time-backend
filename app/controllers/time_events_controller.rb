@@ -29,11 +29,6 @@ class TimeEventsController < ApplicationController
   end
 
   def reorder
-    if params[:date].blank?
-      render json: { error: 'date is required' }, status: :unprocessable_entity
-      return
-    end
-
     ActiveRecord::Base.transaction do
       params[:ids].each_with_index do |time_event_id, index|
         @current_user.time_events.find(time_event_id).update!(order: index)
