@@ -5,7 +5,7 @@ class TimeEvent < ApplicationRecord
   has_one :color, through: :tag
 
   scope :one_year_ago, -> { where(date: 1.year.ago..Time.zone.today) }
-  scope :load_children_with_order, -> { includes(:tag, :color).order(:order) }
+  scope :load_children_with_order, -> { includes(:tag, :color).order(date: :desc) }
 
   validates :name, presence: true
   validates :date, presence: true

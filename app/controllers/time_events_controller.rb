@@ -11,7 +11,7 @@ class TimeEventsController < ApplicationController
       return
     end
 
-    render json: list_all
+    render json: @current_user.time_events.where(date: params[:date]).load_children_with_order
   end
 
   def create
@@ -39,7 +39,7 @@ class TimeEventsController < ApplicationController
       end
     end
 
-    render json: list_all
+    head :ok
   end
 
   def destroy
@@ -55,9 +55,5 @@ class TimeEventsController < ApplicationController
 
   def set_time_event
     @time_event = @current_user.time_events.find(params[:id])
-  end
-
-  def list_all
-    @current_user.time_events.where(date: params[:date]).load_children_with_order
   end
 end

@@ -2,7 +2,7 @@ class TimeEventTagsController < ApplicationController
   before_action :set_time_event_tag, only: %i[update]
 
   def index
-    render json: list_all
+    render json: @current_user.time_event_tags.load_children_with_order
   end
 
   def create
@@ -30,7 +30,7 @@ class TimeEventTagsController < ApplicationController
       end
     end
 
-    render json: list_all
+    head :ok
   end
 
   def destroy
@@ -46,9 +46,5 @@ class TimeEventTagsController < ApplicationController
 
   def set_time_event_tag
     @time_event_tag = @current_user.time_event_tags.find(params[:id])
-  end
-
-  def list_all
-    @current_user.time_event_tags.load_children_with_order
   end
 end

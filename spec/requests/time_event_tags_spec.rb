@@ -63,10 +63,6 @@ RSpec.describe 'TimeEventTags', type: :request do
                                       params: { ids: ids.reverse }
 
       expect(response).to have_http_status(:success)
-
-      json_body = JSON.parse(response.body)
-
-      expect(json_body.pluck('id')).to eq(ids.reverse)
     end
   end
 end
