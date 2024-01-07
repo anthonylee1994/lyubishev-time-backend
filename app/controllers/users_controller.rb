@@ -1,14 +1,6 @@
 class UsersController < ApplicationController
   def me
-    render json: @current_user
-  end
-
-  def update
-    if @current_user.update(user_params)
-      render json: @current_user
-    else
-      render json: @current_user.errors, status: :unprocessable_entity
-    end
+    render json: @current_user, show_token: true
   end
 
   private
